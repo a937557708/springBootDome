@@ -30,7 +30,16 @@
 			<artifactId>spring-boot-dome-common</artifactId>
 			<version>1.0</version>
 		</dependency>
-
+		<!-- Spring Boot 缓存支持启动器 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<!-- Ehcache 坐标 -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

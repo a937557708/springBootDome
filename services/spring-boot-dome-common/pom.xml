@@ -25,8 +25,21 @@
 	</properties>
 
 	<dependencies>
-		
+		<dependency>
 
+			<groupId>com.auth0</groupId>
+
+			<artifactId>java-jwt</artifactId>
+
+			<version>3.8.1</version>
+
+		</dependency>
+		<!--必须放在最后-->
+		<dependency>
+			<groupId>com.baidu.fsg</groupId>
+			<artifactId>uid-generator</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
