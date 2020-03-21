@@ -1,17 +1,17 @@
 package com.tjr.dao;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
 import com.tjr.Entity.SysResources;
 import com.tjr.Entity.SysRole;
 import com.tjr.Entity.SysUser;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
-public interface SysUserRepository extends BaseRepository<SysUser, Long> {
+public interface SysUserRepository extends BaseRepository<SysUser, Long> , QuerydslPredicateExecutor<SysUser> {
 
 	@Query(nativeQuery = true, value = "SELECT sr.* " + " FROM sys_role sr\r\n"
 			+ "LEFT JOIN sys_user_role sur ON sur.role_id=sr.id" + " where sur.user_id=:userId")

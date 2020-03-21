@@ -43,24 +43,24 @@ public class UploadController extends BaseController {
 
 		return ResponseUtils.ok(this.getMessage("file.upload.success", request));
 	}
-	/**
-	 * 上传文件
-	 */
-	@RequestMapping(method = RequestMethod.POST, path = "/upload")
-	@ResponseBody
-	public String upload(@RequestPart("file") MultipartFile file) {
-		try {
-			// 得到上传时的文件名
-			String originalFilename = file.getOriginalFilename();
-			JSONObject datajson = configProperties.getDatajson();
-			String saveFile = datajson.getString("saveFile");
-			file.transferTo(new File(saveFile + originalFilename));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "上传失败";
-		}
-		return "上传成功";
-	}
+//	/**
+//	 * 上传文件
+//	 */
+//	@RequestMapping(method = RequestMethod.POST, path = "/upload")
+//	@ResponseBody
+//	public String upload(@RequestPart("file") MultipartFile file) {
+//		try {
+//			// 得到上传时的文件名
+//			String originalFilename = file.getOriginalFilename();
+//			JSONObject datajson = configProperties.getDatajson();
+//			String saveFile = datajson.getString("saveFile");
+//			file.transferTo(new File(saveFile + originalFilename));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return "上传失败";
+//		}
+//		return "上传成功";
+//	}
 	/**
 	 * 下载文件
 	 *
