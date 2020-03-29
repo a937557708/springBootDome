@@ -1,14 +1,11 @@
 package com.tjr.criteria;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
-import org.hibernate.criterion.Property;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LogicalExpression implements Criterion {  
     private Criterion[] criterion;  // 逻辑表达式中包含的表达式  

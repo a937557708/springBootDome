@@ -25,6 +25,7 @@
 	<modules>
 		<module>services/spring-boot-dome-common</module>
 		<module>services/spring-boot-dome-1</module>
+		<module>services/uid-generator-master</module>
 	</modules>
 	<dependencies>
 		<dependency>
@@ -110,12 +111,7 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.tjr</groupId>
-			<artifactId>spring-boot-dome-common</artifactId>
-			<version>1.0</version>
-			<scope>compile</scope>
-		</dependency>
+
 
 
 	</dependencies>
