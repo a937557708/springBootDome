@@ -1,10 +1,10 @@
 package com.tjr.common;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.tjr.Entity.SysResources;
-import com.tjr.Entity.SysRole;
-import com.tjr.Entity.SysUser;
-import com.tjr.dao.SysUserRepository;
+import com.tjr.base.Entity.SysResources;
+import com.tjr.base.Entity.SysRole;
+import com.tjr.base.Entity.SysUser;
+import com.tjr.base.dao.SysUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -41,7 +41,7 @@ public class SystemConfig {
 
 	@Autowired
 	@PersistenceContext
-	private EntityManager entityManager;
+	public EntityManager entityManager;
 
 	public static JPAQueryFactory queryFactory;
 

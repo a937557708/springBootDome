@@ -1,7 +1,5 @@
 package com.tjr.utils;
 
-import lombok.Data;
-
 public enum CacheConst {
     PROJECT("springBootDome");
     private String name;

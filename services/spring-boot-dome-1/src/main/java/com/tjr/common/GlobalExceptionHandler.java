@@ -1,6 +1,6 @@
 package com.tjr.common;
 
-import com.tjr.controller.BaseController;
+import com.tjr.base.controller.BaseController;
 import com.tjr.utils.ResponseUtils;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler extends BaseController {
 		} else if (ex instanceof UnauthorizedException) {
 			return ResponseUtils.errorException(this.getMessage("shiro.error", request));
 		}
-
+		ex.printStackTrace();
 		return ResponseUtils.errorException(this.getMessage("execption.error", request));
 	}
 

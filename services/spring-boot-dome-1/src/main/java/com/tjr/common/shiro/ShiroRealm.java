@@ -1,15 +1,11 @@
 package com.tjr.common.shiro;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.tjr.base.Entity.SysResources;
+import com.tjr.base.Entity.SysRole;
+import com.tjr.base.Entity.SysUser;
+import com.tjr.common.SystemConfig;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AccountException;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -18,10 +14,8 @@ import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.tjr.Entity.SysResources;
-import com.tjr.Entity.SysRole;
-import com.tjr.Entity.SysUser;
-import com.tjr.common.SystemConfig;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * created by huxm on 2018/6/4
