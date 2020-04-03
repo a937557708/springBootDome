@@ -9,13 +9,16 @@ es yam配置文件
 bootstrap.memory_lock: false
 cluster.name: elasticsearch
 http.port: 9200
-network.host: 127.0.0.1
+network.host: 0.0.0.0
 node.data: true
 node.ingest: true
 node.master: true
 node.max_local_storage_nodes: 1
 node.name: WNT123
+transport.tcp.port: 9300
+cluster.initial_master_nodes: ["WNT123"]
+
+
 path.data: D:\ElasticSearch\elasticsearch-7.6.1\data
 path.logs: D:\ElasticSearch\elasticsearch-7.6.1\logs
-transport.tcp.port: 9300
-reindex.remote.whitelist: 127.0.0.2:9200
+
