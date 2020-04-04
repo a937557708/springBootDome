@@ -15,7 +15,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.2.RELEASE</version>
+		<version>2.2.5.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -26,6 +26,7 @@
 		<module>services/spring-boot-dome-common</module>
 		<module>services/spring-boot-dome-1</module>
 		<module>services/uid-generator-master</module>
+		<module>services/abbitmq-provider</module>
 	</modules>
 	<dependencies>
 		<dependency>

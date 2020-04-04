@@ -1,0 +1,6 @@
+部署：
+使用远程IP：
+添加用户并设置密码:rabbitmqctl add_user  admin 123456
+添加权限（使admin用户对虚拟主机“/” 具有所有权限）: rabbitmqctl set_permissions -p "/" admin ".*" ".*" ".*"
+修改用户角色（加入administrator用户组）： rabbitmqctl set_user_tags admin administrator
+就可以通过http://ip:15672 使用admin 123456 进行登陆了
