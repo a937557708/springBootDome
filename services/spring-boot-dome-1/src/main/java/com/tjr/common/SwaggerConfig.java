@@ -28,6 +28,7 @@ public class SwaggerConfig {
 	 * "com.young"
 	 * 
 	 * @return
+	 *
 	 */
 	@Bean
 	public Docket api() {

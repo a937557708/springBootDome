@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/swagger")
+@RequestMapping("/swaggerInfo")
 @Api(value = "/Swagger", description = "Swagger请求")
 public class SwaggerController extends BaseController {
 	@Autowired
@@ -33,7 +33,7 @@ public class SwaggerController extends BaseController {
 	@Autowired
 	private ServerConfig serverConfig;
 
-	@RequiresPermissions(value = { "swagger.v2.api-docs" })
+	//@RequiresPermissions(value = { "swagger.v2.api-docs" })
 	@GetMapping("/v2/api-docs/{id}")
 	@ApiOperation(value = "查看文档", httpMethod = "POST")
 	public ResponseUtils getDocs(@PathVariable("id") String id, HttpServletRequest request) {

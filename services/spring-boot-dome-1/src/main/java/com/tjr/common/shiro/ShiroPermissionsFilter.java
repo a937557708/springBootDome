@@ -59,7 +59,11 @@ public class ShiroPermissionsFilter extends FormAuthenticationFilter {
 		logger.info("----------权限控制-------------");
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
+		String uri=request.getServletPath();
 		if (!isAjax(request)) {
+			return true;
+		}
+		if(uri.startsWith("/swagger")){
 			return true;
 		}
 		String username = request.getHeader("username");
