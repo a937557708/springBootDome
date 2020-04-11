@@ -5,6 +5,7 @@ import com.tjr.base.Entity.QTSysMenu;
 import com.tjr.base.Entity.TSysMenu;
 import com.tjr.base.dao.TSysMenuRepository;
 import com.tjr.base.services.AsyncService;
+import com.tjr.base.services.IEntityDao;
 import com.tjr.common.SystemConfig;
 import com.tjr.utils.ResponseUtils;
 import org.slf4j.Logger;
@@ -20,7 +21,8 @@ import java.util.List;
 public class PublicAllController {
     @Autowired
     private TSysMenuRepository iTSysMenuReository;
-
+    @Autowired
+    private IEntityDao iEntityDao;
     @Autowired
     private AsyncService IAsyncService;
     private static final Logger logger=  LoggerFactory.getLogger(PublicAllController.class);
