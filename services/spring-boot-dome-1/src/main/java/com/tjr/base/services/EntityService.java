@@ -1,12 +1,13 @@
 package com.tjr.base.services;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Repository
 public class EntityService<T> implements IEntityDao<T> {
 
     private EntityManager em;
@@ -42,7 +43,6 @@ public class EntityService<T> implements IEntityDao<T> {
         }
         if (num != BATCH_SIZE) {
             em.clear();
-            ;
             em.flush();
         }
         return result;
@@ -62,13 +62,11 @@ public class EntityService<T> implements IEntityDao<T> {
             em.persist(entity);
             if (num++ == BATCH_SIZE) {
                 em.clear();
-                ;
                 em.flush();
             }
         }
         if (num != BATCH_SIZE) {
             em.clear();
-            ;
             em.flush();
         }
     }
