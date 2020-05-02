@@ -22,27 +22,27 @@ import java.nio.file.Paths;
 @RequestMapping("/file")
 @Api(value = "/file", description = "文件")
 public class UploadController extends com.tjr.base.controller.BaseController {
-	@Autowired
-	private GlobalProperties configProperties;
+    @Autowired
+    private GlobalProperties configProperties;
 
-	@PostMapping("/upload")
-	@ApiOperation(value = "上传单个文件",httpMethod ="POST")
-	public ResponseUtils singleFileUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
-		if (file.isEmpty()) {
-			return ResponseUtils.errorMsg(this.getMessage("file.upload.isNotNull", request));
-		}
-		try {
-			JSONObject datajson = configProperties.getDatajson();
-			String saveFile = datajson.getString("saveFile");
-			byte[] bytes = file.getBytes();
-			Path path = Paths.get(saveFile + file.getOriginalFilename());
-			Files.write(path, bytes);
-		} catch (IOException e) {
-			return ResponseUtils.errorException(this.getMessage("file.upload.error", request));
-		}
+    @PostMapping("/upload")
+    @ApiOperation(value = "上传单个文件", httpMethod = "POST")
+    public ResponseUtils singleFileUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        if (file.isEmpty()) {
+            return ResponseUtils.errorMsg(this.getMessage("file.upload.isNotNull", request));
+        }
+        try {
+            JSONObject datajson = configProperties.getDatajson();
+            String saveFile = datajson.getString("saveFile");
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(saveFile + file.getOriginalFilename());
+            Files.write(path, bytes);
+        } catch (IOException e) {
+            return ResponseUtils.errorException(this.getMessage("file.upload.error", request));
+        }
 
-		return ResponseUtils.ok(this.getMessage("file.upload.success", request));
-	}
+        return ResponseUtils.ok(this.getMessage("file.upload.success", request));
+    }
 //	/**
 //	 * 上传文件
 //	 */
@@ -61,19 +61,21 @@ public class UploadController extends com.tjr.base.controller.BaseController {
 //		}
 //		return "上传成功";
 //	}
-	/**
-	 * 下载文件
-	 *
-	 */
-	@RequestMapping("/{fileName}")
-	public void renderPicture(@PathVariable("fileName") String fileName, HttpServletResponse response) {
-		try {
-			JSONObject datajson = configProperties.getDatajson();
-			String saveFile = datajson.getString("saveFile");
-			byte[] bytes = FileUtil.readBytes(saveFile+File.separator+fileName);
-			response.getOutputStream().write(bytes);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
+    /**
+     * 下载文件
+     */
+    @RequestMapping("/{fileName}/{type}")
+    public void renderPicture(@PathVariable("fileName") String fileName, @PathVariable("type") String type, HttpServletResponse response) {
+        try {
+            JSONObject datajson = configProperties.getDatajson();
+            String saveFile = datajson.getString("saveFile");
+            byte[] bytes = FileUtil.readBytes(saveFile + File.separator + fileName + "." + type);
+			response.setContentType("application/force-download;fileName=" + fileName+ "." + type);// 设置强制下载不打开            
+            response.getOutputStream().write(bytes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

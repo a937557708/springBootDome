@@ -26,7 +26,7 @@ public class JavaPreJalopy {
             InputStream is = new ByteArrayInputStream(content.getBytes("UTF-8"));
             jalopy.setInput(is, filePath);
             jalopy.setOutput(file);
-            jalopy.format();
+            jalopy.format(true);
             if (jalopy.getState() == Jalopy.State.OK) {
                 reader = new BufferedReader(new FileReader(file));
                 String tempString = null;
@@ -119,10 +119,7 @@ public class JavaPreJalopy {
                 "     */\n" +
                 "    public void set(String key,String value,int timeToIdleSeconds, int timeToLiveSeconds){\n" +
                 "        Cache cache = cacheManager.getCache(CacheConst.PROJECT.getName());\n" +
-                "        Element element = new Element(\n" +
-                "                key, value,\n" +
-                "                timeToIdleSeconds,\n" +
-                "                timeToLiveSeconds);\n" +
+                "        Element element = new Element(   key, value,  timeToIdleSeconds,  timeToLiveSeconds);\n" +
                 "        cache.put(element);\n" +
                 "    }\n" +
                 "\n" +
