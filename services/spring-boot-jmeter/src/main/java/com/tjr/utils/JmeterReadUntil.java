@@ -48,8 +48,7 @@ public class JmeterReadUntil {
         for (Object obj : col) {
             String className = obj.getClass().getName();
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("testclass", className);
-            jsonObject.put("uid", "CreateUUID.getUIID()");
+
             if (className.endsWith(".TestPlan")) {
                 TestPlan testPlan = (TestPlan) obj;
                 getTestPlan(jsonObject, testPlan);
@@ -59,6 +58,9 @@ public class JmeterReadUntil {
             } else if (className.endsWith(".ThreadGroup")) {
                 ThreadGroup threadGroup = (ThreadGroup) obj;
                 getThreadGroup(jsonObject, threadGroup);
+            }else if (className.endsWith(".PostThreadGroup")) {
+                PostThreadGroup postThreadGroup = (PostThreadGroup) obj;
+                getPostThreadGroup(jsonObject, postThreadGroup);
             } else if (className.endsWith(".SetupThreadGroup")) {
                 SetupThreadGroup setupThreadGroup = (SetupThreadGroup) obj;
                 getSetupThreadGroup(jsonObject, setupThreadGroup);
@@ -120,6 +122,8 @@ public class JmeterReadUntil {
             if (jsonObject.size() == 0) {
                 continue;
             }
+            jsonObject.put("testclass", className);
+            jsonObject.put("uid", CreateUUID.getUIID());
             jsonArray.add(jsonObject);
             HashTree tree1 = tree.getTree(obj);
             System.out.println(className);
@@ -135,14 +139,15 @@ public class JmeterReadUntil {
 
     }
 
-    private static void getCounterConfig(JSONObject jsonObject, CounterConfig counterConfig) {
-        jsonObject.put("name", counterConfig.getName());
-        jsonObject.put("enabled", counterConfig.isEnabled());
 
+
+    private static void getCounterConfig(JSONObject jsonObject, CounterConfig counterConfig) {
+
+        jsonObject.put("name",counterConfig.getName());
+        jsonObject.put("enabled", counterConfig.isEnabled());
         jsonObject.put("start", counterConfig.getPropertyAsString("CounterConfig.start"));
         jsonObject.put("end", counterConfig.getPropertyAsString("CounterConfig.end"));
         jsonObject.put("incr", counterConfig.getPropertyAsString("CounterConfig.incr"));
-        jsonObject.put("name", counterConfig.getPropertyAsString("CounterConfig.name"));
         jsonObject.put("format", counterConfig.getPropertyAsString("CounterConfig.format"));
         jsonObject.put("per_user", counterConfig.getPropertyAsBoolean("CounterConfig.per_user"));
 
@@ -418,7 +423,30 @@ public class JmeterReadUntil {
         jsonObject.put("loop", loopJson);
 
     }
+    private static void getPostThreadGroup(JSONObject jsonObject, PostThreadGroup postThreadGroup) {
+        jsonObject.put("name", postThreadGroup.getName());
+        jsonObject.put("enabled", postThreadGroup.isEnabled());
+        jsonObject.put("on_sample_error", postThreadGroup.getPropertyAsString("ThreadGroup.on_sample_error"));
+        jsonObject.put("num_threads", postThreadGroup.getPropertyAsInt("ThreadGroup.num_threads"));
+        jsonObject.put("ramp_time", postThreadGroup.getPropertyAsInt("ThreadGroup.ramp_time"));
+        jsonObject.put("scheduler", postThreadGroup.getPropertyAsBoolean("ThreadGroup.scheduler"));
+        jsonObject.put("duration", postThreadGroup.getPropertyAsInt("ThreadGroup.duration"));
+        jsonObject.put("delay", postThreadGroup.getPropertyAsInt("ThreadGroup.delay"));
+        jsonObject.put("same_user_on_next_iteration", postThreadGroup.getPropertyAsBoolean("ThreadGroup.same_user_on_next_iteration"));
 
+
+        JMeterProperty loopPro = postThreadGroup.getProperty("ThreadGroup.main_controller");
+        LoopController loopController = (LoopController) loopPro.getObjectValue();
+
+
+        JSONObject loopJson = new JSONObject();
+
+        loopJson.put("continue_forever", loopController.getPropertyAsBoolean("LoopController.continue_forever"));
+        loopJson.put("loops", loopController.getPropertyAsInt("LoopController.loops"));
+
+        jsonObject.put("loop", loopJson);
+
+    }
     private static void getThreadGroup(JSONObject jsonObject, ThreadGroup threadGroup) {
 
         jsonObject.put("name", threadGroup.getName());

@@ -51,7 +51,7 @@ public class JmeterWriteUntil {
         }
 
 
-        int num=0;
+        int num = 0;
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject treeObj = (JSONObject) jsonArray.get(i);
             String className = treeObj.getString("testclass");
@@ -63,17 +63,17 @@ public class JmeterWriteUntil {
             Object obj = null;
 
 
-            for (int ij= 0; ij < treeArr.length;ij++) {
+            for (int ij = 0; ij < treeArr.length; ij++) {
                 Object obj1 = treeArr[ij];
                 String classN = obj1.getClass().getName();
-                if((ij>=num && ij>=i ) && classN.equals(className)){
-                    obj=obj1;
-                    num=ij;
+                if ((ij >= num && ij >= i) && classN.equals(className)) {
+                    obj = obj1;
+                    num = ij;
                     break;
                 }
 
             }
-            if(obj==null){
+            if (obj == null) {
                 continue;
             }
             if (className.endsWith(".TestPlan")) {
@@ -89,6 +89,9 @@ public class JmeterWriteUntil {
                 SetupThreadGroup setupThreadGroup = (SetupThreadGroup) obj;
                 writeSetupThreadGroup(setupThreadGroup, treeObj);
 
+            } else if (className.endsWith(".PostThreadGroup")) {
+                PostThreadGroup postThreadGroup = (PostThreadGroup) obj;
+                writePostThreadGroup(postThreadGroup, treeObj);
             } else if (className.endsWith(".SteppingThreadGroup")) {
                 SteppingThreadGroup steppingThreadGroup = (SteppingThreadGroup) obj;
 
@@ -187,6 +190,7 @@ public class JmeterWriteUntil {
 
 
     }
+
 
     private static void writeCounterConfig(CounterConfig counterConfig, JSONObject treeObj) {
         counterConfig.setEnabled(treeObj.getBooleanValue("enabled"));
@@ -368,7 +372,6 @@ public class JmeterWriteUntil {
         if (cookies != null && cookies.size() > 0) {
 
 
-
             CollectionProperty collectionProperty = cookieManager.getCookies();
             collectionProperty.clear();
 
@@ -401,7 +404,6 @@ public class JmeterWriteUntil {
 
             CollectionProperty collectionProperty = headerManager.getHeaders();
             collectionProperty.clear();
-
 
 
             for (Object obj : headers) {
@@ -438,7 +440,7 @@ public class JmeterWriteUntil {
         JSONObject loopJson = treeObj.getJSONObject("loop");
         JMeterProperty loopPro = steppingThreadGroup.getProperty("ThreadGroup.main_controller");
         LoopController loopController = (LoopController) loopPro.getObjectValue();
-        if(loopController!=null && loopJson!=null){
+        if (loopController != null && loopJson != null) {
             loopController.setProperty("LoopController.continue_forever", loopJson.getBooleanValue("continue_forever"));
             loopController.setProperty("LoopController.loops", loopJson.getIntValue("loops"));
 
@@ -448,7 +450,32 @@ public class JmeterWriteUntil {
         }
 
 
+    }
 
+    private static void writePostThreadGroup(PostThreadGroup postThreadGroup, JSONObject treeObj) {
+        postThreadGroup.setEnabled(treeObj.getBooleanValue("enabled"));
+        postThreadGroup.setName(treeObj.getString("name"));
+        postThreadGroup.setProperty("ThreadGroup.on_sample_error", treeObj.getString("on_sample_error"));
+        postThreadGroup.setProperty("ThreadGroup.num_threads", treeObj.getIntValue("num_threads"));
+        postThreadGroup.setProperty("ThreadGroup.ramp_time", treeObj.getIntValue("ramp_time"));
+        postThreadGroup.setProperty("ThreadGroup.scheduler", treeObj.getBooleanValue("scheduler"));
+        postThreadGroup.setProperty("ThreadGroup.duration", treeObj.getIntValue("duration"));
+        postThreadGroup.setProperty("ThreadGroup.delay", treeObj.getIntValue("delay"));
+        postThreadGroup.setProperty("ThreadGroup.same_user_on_next_iteration", treeObj.getBooleanValue("same_user_on_next_iteration"));
+
+
+        JSONObject loopJson = treeObj.getJSONObject("loop");
+        JMeterProperty loopPro = postThreadGroup.getProperty("ThreadGroup.main_controller");
+        LoopController loopController = (LoopController) loopPro.getObjectValue();
+
+        if (loopController != null && loopJson != null) {
+            loopController.setProperty("LoopController.continue_forever", loopJson.getBooleanValue("continue_forever"));
+            loopController.setProperty("LoopController.loops", loopJson.getIntValue("loops"));
+
+            loopPro.setObjectValue(loopController);
+
+            postThreadGroup.setProperty(loopPro);
+        }
     }
 
     private static void writeSetupThreadGroup(SetupThreadGroup setupThreadGroup, JSONObject treeObj) {
@@ -468,7 +495,7 @@ public class JmeterWriteUntil {
         JMeterProperty loopPro = setupThreadGroup.getProperty("ThreadGroup.main_controller");
         LoopController loopController = (LoopController) loopPro.getObjectValue();
 
-        if(loopController!=null&& loopJson!=null){
+        if (loopController != null && loopJson != null) {
             loopController.setProperty("LoopController.continue_forever", loopJson.getBooleanValue("continue_forever"));
             loopController.setProperty("LoopController.loops", loopJson.getIntValue("loops"));
 
@@ -495,7 +522,7 @@ public class JmeterWriteUntil {
         JSONObject loopJson = treeObj.getJSONObject("loop");
         JMeterProperty loopPro = threadGroup.getProperty("ThreadGroup.main_controller");
         LoopController loopController = (LoopController) loopPro.getObjectValue();
-        if(loopController!=null && loopJson!=null){
+        if (loopController != null && loopJson != null) {
             try {
                 loopController.setProperty("LoopController.continue_forever", loopJson.getBooleanValue("continue_forever"));
                 loopController.setProperty("LoopController.loops", loopJson.getIntValue("loops"));
@@ -503,7 +530,7 @@ public class JmeterWriteUntil {
                 loopPro.setObjectValue(loopController);
 
                 threadGroup.setProperty(loopPro);
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
@@ -522,7 +549,7 @@ public class JmeterWriteUntil {
 
         JSONArray argArray = treeObj.getJSONArray("arguments");
         Arguments arguments = testPlan.getArguments();
-        arguments.clear();
+//        arguments.clear();
         writeArguments(arguments, Arrays.asList("name", "value", "metadata"), argArray);
 
     }
@@ -531,11 +558,15 @@ public class JmeterWriteUntil {
         arguments.setEnabled(jsonObject.getBooleanValue("enabled"));
         arguments.setName(jsonObject.getString("name"));
         JSONArray argArray = jsonObject.getJSONArray("arguments");
-        arguments.clear();
+//        arguments.clear();
+
         writeArguments(arguments, Arrays.asList("name", "value", "metadata"), argArray);
     }
 
     private static void writeArguments(Arguments arguments, List<String> argList, JSONArray argArray) {
+        CollectionProperty collectionProperty = arguments.getArguments();
+
+        collectionProperty.clear();
         for (Object obj : argArray) {
             JSONObject argJson = (JSONObject) obj;
             Argument argument = new Argument();
