@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.tjr</groupId>
+    <artifactId>spring-boot-jmeter</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <name>spring-boot-jmeter</name>
+    <description>Demo project for Spring Boot</description>
+
+    <parent>
+        <groupId>com.tjr</groupId>
+        <artifactId>spring-boot-dome-root</artifactId>
+        <version>1.0</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <jmeter.version>5.0</jmeter.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.tjr</groupId>
+            <artifactId>spring-boot-dome-common</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_components</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_components.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_core</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_core.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_ftp</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_ftp.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_functions</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_functions.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_http</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_http.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_java</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_java.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_jdbc</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_jdbc.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_jms</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_jms.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_junit</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_junit.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_ldap</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_ldap.jar</systemPath>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_mail</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_mail.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_native</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_native.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_tcp</artifactId>
+            <version>5.0</version>
+            <systemPath>${basedir}/lib/ApacheJMeter_tcp.jar</systemPath>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+                <version>1.1.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/generated-sources/java</outputDirectory>
+                            <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>lib</directory>
+                <targetPath>BOOT-INF/lib/</targetPath>
+                <includes>
+                    <include>**/*.jar</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>BOOT-INF/classes/</targetPath>
+            </resource>
+        </resources>
+    </build>
+
+
+</project>

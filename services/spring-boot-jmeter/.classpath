@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="lib">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path=".apt_generated">
+		<attributes>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path=".apt_generated_tests">
+		<attributes>
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/jmeter-plugins-manager-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_bolt.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_components.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_core.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_ftp.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_functions.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_http.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_java.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_jdbc.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_jms.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_junit.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_ldap.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_mail.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_mongodb.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_native.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_tcp.jar"/>
+	<classpathentry kind="lib" path="lib/jmeter-plugins-casutg-2.9.jar"/>
+	<classpathentry kind="lib" path="lib/JMeterPlugins-Extras.jar"/>
+	<classpathentry kind="lib" path="lib/JMeterPlugins-Standard.jar"/>
+	<classpathentry kind="lib" path="lib/xstream-1.4.10.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

@@ -1,0 +1,38 @@
+SpringBoot要使用@Async需要以下两个步骤：
+
+1.使用@EnableAsync开启异步；
+
+2.定义Spring组件，使用@Component或@Servcie和@Async；
+
+
+SpringBoot使用@Async注解失效分析
+
+有时候在使用的过程中@Async注解会失效（原因和@Transactional注解有时候会失效的原因一样）
+
+
+异步调用介绍
+1，异步调用
+    异步调用就是在不阻塞主线程的情况下执行高耗时方法
+2，常规异步
+    通过开启新线程实现
+3，在Springboot中启用异步方法
+    需要4个注解
+    @EnableAsync 开启异步
+    @Component 注册异步组件
+    @Async 标注异步方法
+    @Autowired 注入异步组件
+4，进行一次异步调用
+    首先在一个Config类上标注开启异步
+    然后创建一个异步的组件类，就跟Service，Controller 一样一样的，用Component标注，Service也行
+    在类内创建一个异步方法，打上Async 标记。这个方法必须是实例方法。
+    然后就跟注入Service一样一样的了。
+5，异步事务
+    在Async 方法上标注@Transactional是没用的。
+    在Async 方法调用的Service上标注@Transactional 有效。
+6，异步方法的内部调用
+    异步方法不支持内部调用，也就是异步方法不能写在需要调用他的类的内部。
+    比如Class A 有a，b，c。b有Async标注。此时a对b的异步调用是失效的。
+7，为什么异步方法必须是实例方法
+    因为static方法不能被Override。因为@Async 异步方法的实现原理是通过注入一个代理类到Bean中，这个代理继承这个Bean，需要覆写异步方法并执行。
+    然后这个东西，会被Spring放到自己维护的一个队列中。等待线程池读取并执行。
+
