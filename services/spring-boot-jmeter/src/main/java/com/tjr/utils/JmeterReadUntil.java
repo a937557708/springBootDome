@@ -48,93 +48,73 @@ public class JmeterReadUntil {
         for (Object obj : col) {
             String className = obj.getClass().getName();
             JSONObject jsonObject = new JSONObject();
+            jsonObject.put("testclass", className);
+            jsonObject.put("uid", "CreateUUID.getUIID()");
             if (className.endsWith(".TestPlan")) {
                 TestPlan testPlan = (TestPlan) obj;
-                jsonObject.put("testclass", "TestPlan");
                 getTestPlan(jsonObject, testPlan);
             } else if (className.endsWith(".Arguments")) {
                 Arguments arguments = (Arguments) obj;
-                jsonObject.put("testclass", "Arguments");
                 getArgument(jsonObject, arguments, Arrays.asList("name", "value", "metadata"));
             } else if (className.endsWith(".ThreadGroup")) {
                 ThreadGroup threadGroup = (ThreadGroup) obj;
-                jsonObject.put("testclass", "ThreadGroup");
                 getThreadGroup(jsonObject, threadGroup);
             } else if (className.endsWith(".SetupThreadGroup")) {
                 SetupThreadGroup setupThreadGroup = (SetupThreadGroup) obj;
-                jsonObject.put("testclass", "SetupThreadGroup");
                 getSetupThreadGroup(jsonObject, setupThreadGroup);
             } else if (className.endsWith(".SteppingThreadGroup")) {
                 SteppingThreadGroup steppingThreadGroup = (SteppingThreadGroup) obj;
-                jsonObject.put("testclass", "SteppingThreadGroup");
                 getSteppingThreadGroup(jsonObject, steppingThreadGroup);
             } else if (className.endsWith(".HeaderManager")) {
                 HeaderManager headerManager = (HeaderManager) obj;
-                jsonObject.put("testclass", "HeaderManager");
                 getHeaderManager(jsonObject, headerManager);
             } else if (className.endsWith(".CookieManager")) {
                 CookieManager cookieManager = (CookieManager) obj;
-                jsonObject.put("testclass", "CookieManager");
                 getCookieManager(jsonObject, cookieManager);
             } else if (className.endsWith(".JavaConfig")) {
                 JavaConfig javaConfig = (JavaConfig) obj;
-                jsonObject.put("testclass", "JavaConfig");
                 getJavaConfig(jsonObject, javaConfig);
             } else if (className.endsWith(".HTTPSamplerProxy")) {
                 HTTPSamplerProxy httpSamplerProxy = (HTTPSamplerProxy) obj;
-                jsonObject.put("testclass", "HTTPSamplerProxy");
                 getHTTPSamplerProxy(jsonObject, httpSamplerProxy);
-            } else if (className.endsWith(".HTTPSamplerProxy")) {
+            } else if (className.endsWith(".TransactionController")) {
                 TransactionController transactionController = (TransactionController) obj;
-                jsonObject.put("testclass", "HTTPSamplerProxy");
                 getTransactionController(jsonObject, transactionController);
             } else if (className.endsWith(".IfController")) {
                 IfController ifController = (IfController) obj;
-                jsonObject.put("testclass", "IfController");
                 getIfController(jsonObject, ifController);
             } else if (className.endsWith(".LoopController")) {
                 LoopController loopController = (LoopController) obj;
-                jsonObject.put("testclass", "LoopController");
                 getLoopController(jsonObject, loopController);
             } else if (className.endsWith(".WhileController")) {
                 WhileController whileController = (WhileController) obj;
-                jsonObject.put("testclass", "WhileController");
                 getWhileController(jsonObject, whileController);
-            } else if (className.endsWith(".OnceOnlyControllerGui")) {
+            } else if (className.endsWith(".OnceOnlyController")) {
                 OnceOnlyController onceOnlyController = (OnceOnlyController) obj;
-                jsonObject.put("testclass", "OnceOnlyController");
                 getOnceOnlyController(jsonObject, onceOnlyController);
             } else if (className.endsWith(".ThroughputController")) {
                 ThroughputController throughputController = (ThroughputController) obj;
-                jsonObject.put("testclass", "ThroughputController");
                 getThroughputController(jsonObject, throughputController);
-            } else if (className.endsWith(".SwitchControllerGui")) {
+            } else if (className.endsWith(".SwitchController")) {
                 SwitchController switchController = (SwitchController) obj;
-                jsonObject.put("testclass", "SwitchController");
                 getSwitchControllerGui(jsonObject, switchController);
             } else if (className.endsWith(".JSONPathAssertion")) {
                 JSONPathAssertion jsonPathAssertion = (JSONPathAssertion) obj;
-                jsonObject.put("testclass", "JSONPathAssertion");
                 getJSONPathAssertion(jsonObject, jsonPathAssertion);
             } else if (className.endsWith(".XPathAssertion")) {
                 XPathAssertion xPathAssertion = (XPathAssertion) obj;
-                jsonObject.put("testclass", "XPathAssertion");
                 getXPathAssertion(jsonObject, xPathAssertion);
             } else if (className.endsWith(".ConstantTimer")) {
                 ConstantTimer constantTimer = (ConstantTimer) obj;
-                jsonObject.put("testclass", "ConstantTimer");
                 getConstantTimer(jsonObject, constantTimer);
             }else if (className.endsWith(".CSVDataSet")) {
                 CSVDataSet csvDataSet = (CSVDataSet) obj;
-                jsonObject.put("testclass", "CSVDataSet");
                 getCSVDataSet(jsonObject, csvDataSet);
             }else if (className.endsWith(".ConfigTestElement")) {
                 ConfigTestElement configTestElement = (ConfigTestElement) obj;
-                jsonObject.put("testclass", "ConfigTestElement");
                 getConfigTestElement(jsonObject, configTestElement);
             }else if (className.endsWith(".CounterConfig")) {
                 CounterConfig counterConfig = (CounterConfig) obj;
-                jsonObject.put("testclass", "CounterConfig");
                 getCounterConfig(jsonObject, counterConfig);
             }
             if (jsonObject.size() == 0) {
@@ -290,9 +270,9 @@ public class JmeterReadUntil {
         HTTPFileArg[] httpFileArgs = httpSamplerProxy.getHTTPFiles();
 
         if (httpFileArgs != null && httpFileArgs.length > 0) {
-            List<Map> fileList = new ArrayList<>();
+            List<JSONObject> fileList = new ArrayList<>();
             for (HTTPFileArg fileArgs : httpFileArgs) {
-                Map map = new HashMap();
+                JSONObject map = new JSONObject();
                 map.put("path", fileArgs.getPropertyAsString("File.path"));
                 map.put("paramname", fileArgs.getPropertyAsString("File.paramname"));
                 map.put("mimetype", fileArgs.getPropertyAsString("File.mimetype"));
@@ -336,7 +316,7 @@ public class JmeterReadUntil {
         jsonObject.put("name", cookieManager.getName());
         jsonObject.put("enabled", cookieManager.isEnabled());
         jsonObject.put("clearEachIteration", cookieManager.getPropertyAsBoolean("CookieManager.clearEachIteration"));
-        List<Map> cookies = new ArrayList<>();
+        List<JSONObject> cookies = new ArrayList<>();
 
         CollectionProperty collectionProperty = cookieManager.getCookies();
 
@@ -345,7 +325,7 @@ public class JmeterReadUntil {
 
             Cookie cookie = (Cookie) jm.getObjectValue();
 
-            Map map = new HashMap();
+            JSONObject map = new JSONObject();
             map.put("name", cookie.getName());
             map.put("value", cookie.getPropertyAsString("Cookie.value"));
 
@@ -366,7 +346,7 @@ public class JmeterReadUntil {
         jsonObject.put("name", headerManager.getName());
         jsonObject.put("enabled", headerManager.isEnabled());
 
-        List<Map> headers = new ArrayList<>();
+        List<JSONObject> headers = new ArrayList<>();
 
         CollectionProperty collectionProperty = headerManager.getHeaders();
 
@@ -375,7 +355,7 @@ public class JmeterReadUntil {
             Header header = (Header) jm.getObjectValue();
 
 
-            Map map = new HashMap();
+            JSONObject map = new JSONObject();
             map.put("name", header.getPropertyAsString("Header.name"));
             map.put("value", header.getPropertyAsString("Header.value"));
             headers.add(map);
