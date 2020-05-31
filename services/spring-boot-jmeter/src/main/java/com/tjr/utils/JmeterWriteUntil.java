@@ -201,6 +201,7 @@ public class JmeterWriteUntil {
         counterConfig.setProperty("CounterConfig.name", treeObj.getString("name"));
         counterConfig.setProperty("CounterConfig.format", treeObj.getString("format"));
         counterConfig.setProperty("CounterConfig.per_user", treeObj.getBooleanValue("per_user"));
+        counterConfig.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
 
     }
@@ -217,6 +218,7 @@ public class JmeterWriteUntil {
 
         configTestElement.setProperty("CounterConfig.binarymode", treeObj.getBooleanValue("binarymode"));
         configTestElement.setProperty("CounterConfig.saveresponse", treeObj.getBooleanValue("saveresponse"));
+        configTestElement.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
 
     }
@@ -234,6 +236,7 @@ public class JmeterWriteUntil {
         csvDataSet.setProperty("shareMode", treeObj.getString("shareMode"));
         csvDataSet.setProperty("stopThread", treeObj.getBooleanValue("stopThread"));
         csvDataSet.setProperty("variableNames", treeObj.getString("variableNames"));
+        csvDataSet.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
     }
 
@@ -242,6 +245,7 @@ public class JmeterWriteUntil {
         constantTimer.setEnabled(treeObj.getBooleanValue("enabled"));
         constantTimer.setName(treeObj.getString("name"));
         constantTimer.setProperty("ConstantTimer.delay", treeObj.getBooleanValue("delay"));
+        constantTimer.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
     }
 
@@ -255,6 +259,9 @@ public class JmeterWriteUntil {
         xPathAssertion.setProperty("XPath.whitespace", treeObj.getBooleanValue("whitespace"));
         xPathAssertion.setProperty("XPath.tolerant", treeObj.getBooleanValue("tolerant"));
         xPathAssertion.setProperty("XPath.namespace", treeObj.getBooleanValue("namespace"));
+        xPathAssertion.setProperty("TestPlan.comments", treeObj.getString("comments"));
+
+
     }
 
     private static void writeJSONPathAssertion(JSONPathAssertion jsonPathAssertion, JSONObject treeObj) {
@@ -266,6 +273,7 @@ public class JmeterWriteUntil {
         jsonPathAssertion.setProperty("EXPECT_NULL", treeObj.getBooleanValue("EXPECT_NULL"));
         jsonPathAssertion.setProperty("INVERT", treeObj.getBooleanValue("INVERT"));
         jsonPathAssertion.setProperty("ISREGEX", treeObj.getBooleanValue("ISREGEX"));
+        jsonPathAssertion.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
 
     }
@@ -274,11 +282,14 @@ public class JmeterWriteUntil {
         switchController.setEnabled(treeObj.getBooleanValue("enabled"));
         switchController.setName(treeObj.getString("name"));
         switchController.setProperty("SwitchController.style", treeObj.getString("style"));
+        switchController.setProperty("TestPlan.comments", treeObj.getString("comments"));
+
     }
 
     private static void writeThroughputController(ThroughputController throughputController, JSONObject treeObj) {
         throughputController.setEnabled(treeObj.getBooleanValue("enabled"));
         throughputController.setName(treeObj.getString("name"));
+        throughputController.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
 
     }
@@ -286,6 +297,7 @@ public class JmeterWriteUntil {
     private static void writeOnceOnlyController(OnceOnlyController onceOnlyController, JSONObject treeObj) {
         onceOnlyController.setEnabled(treeObj.getBooleanValue("enabled"));
         onceOnlyController.setName(treeObj.getString("name"));
+        onceOnlyController.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
 
     }
@@ -294,6 +306,9 @@ public class JmeterWriteUntil {
         whileController.setEnabled(treeObj.getBooleanValue("enabled"));
         whileController.setName(treeObj.getString("name"));
         whileController.setProperty("WhileController.condition", treeObj.getString("condition"));
+        whileController.setProperty("TestPlan.comments", treeObj.getString("comments"));
+
+
     }
 
     private static void writeLoopController(LoopController loopController, JSONObject treeObj) {
@@ -301,22 +316,29 @@ public class JmeterWriteUntil {
         loopController.setName(treeObj.getString("name"));
         loopController.setProperty("LoopController.continue_forever", treeObj.getString("continue_forever"));
         loopController.setProperty("LoopController.loops", treeObj.getString("loops"));
+        loopController.setProperty("TestPlan.comments", treeObj.getString("comments"));
+
+
     }
 
     private static void writeIfController(IfController ifController, JSONObject treeObj) {
         ifController.setEnabled(treeObj.getBooleanValue("enabled"));
         ifController.setName(treeObj.getString("name"));
+        ifController.setProperty("TestPlan.comments", treeObj.getString("comments"));
+
     }
 
     private static void writeTransactionController(TransactionController transactionController, JSONObject treeObj) {
         transactionController.setEnabled(treeObj.getBooleanValue("enabled"));
         transactionController.setName(treeObj.getString("name"));
+        transactionController.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
     }
 
     private static void writeHTTPSamplerProxy(HTTPSamplerProxy httpSamplerProxy, JSONObject treeObj) {
         httpSamplerProxy.setEnabled(treeObj.getBooleanValue("enabled"));
         httpSamplerProxy.setName(treeObj.getString("name"));
+        httpSamplerProxy.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
         JSONArray files = treeObj.getJSONArray("files");
         if (files != null && files.size() > 0) {
@@ -355,6 +377,7 @@ public class JmeterWriteUntil {
     private static void writeJavaConfigr(JavaConfig javaConfig, JSONObject treeObj) {
         javaConfig.setEnabled(treeObj.getBooleanValue("enabled"));
         javaConfig.setName(treeObj.getString("name"));
+        javaConfig.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
 
         JSONArray argArray = treeObj.getJSONArray("arguments");
@@ -368,6 +391,8 @@ public class JmeterWriteUntil {
 //        cookieManager.clear();
         cookieManager.setEnabled(treeObj.getBooleanValue("enabled"));
         cookieManager.setName(treeObj.getString("name"));
+        cookieManager.setProperty("TestPlan.comments", treeObj.getString("comments"));
+
         JSONArray cookies = treeObj.getJSONArray("cookies");
         if (cookies != null && cookies.size() > 0) {
 
@@ -399,6 +424,8 @@ public class JmeterWriteUntil {
 //        headerManager.clear();
         headerManager.setEnabled(treeObj.getBooleanValue("enabled"));
         headerManager.setName(treeObj.getString("name"));
+        headerManager.setProperty("TestPlan.comments", treeObj.getString("comments"));
+
         JSONArray headers = treeObj.getJSONArray("headers");
         if (headers != null && headers.size() > 0) {
 
@@ -425,6 +452,7 @@ public class JmeterWriteUntil {
         steppingThreadGroup.setName(treeObj.getString("name"));
         steppingThreadGroup.setProperty("ThreadGroup.on_sample_error", treeObj.getString("on_sample_error"));
         steppingThreadGroup.setProperty("ThreadGroup.num_threads", treeObj.getIntValue("num_threads"));
+        steppingThreadGroup.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
 
         steppingThreadGroup.setProperty("Threads initial delay", treeObj.getString("threads_initial_delay"));
@@ -462,6 +490,7 @@ public class JmeterWriteUntil {
         postThreadGroup.setProperty("ThreadGroup.duration", treeObj.getIntValue("duration"));
         postThreadGroup.setProperty("ThreadGroup.delay", treeObj.getIntValue("delay"));
         postThreadGroup.setProperty("ThreadGroup.same_user_on_next_iteration", treeObj.getBooleanValue("same_user_on_next_iteration"));
+        postThreadGroup.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
 
         JSONObject loopJson = treeObj.getJSONObject("loop");
@@ -479,6 +508,7 @@ public class JmeterWriteUntil {
     }
 
     private static void writeSetupThreadGroup(SetupThreadGroup setupThreadGroup, JSONObject treeObj) {
+        setupThreadGroup.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
         setupThreadGroup.setEnabled(treeObj.getBooleanValue("enabled"));
         setupThreadGroup.setName(treeObj.getString("name"));
@@ -507,6 +537,7 @@ public class JmeterWriteUntil {
     }
 
     private static void writeThreadGroup(ThreadGroup threadGroup, JSONObject treeObj) {
+        threadGroup.setProperty("TestPlan.comments", treeObj.getString("comments"));
 
         threadGroup.setEnabled(treeObj.getBooleanValue("enabled"));
         threadGroup.setName(treeObj.getString("name"));
@@ -557,6 +588,8 @@ public class JmeterWriteUntil {
     private static void writeArgument(Arguments arguments, List<String> argList, JSONObject jsonObject) {
         arguments.setEnabled(jsonObject.getBooleanValue("enabled"));
         arguments.setName(jsonObject.getString("name"));
+        arguments.setProperty("TestPlan.comments", jsonObject.getString("comments"));
+
         JSONArray argArray = jsonObject.getJSONArray("arguments");
 //        arguments.clear();
 

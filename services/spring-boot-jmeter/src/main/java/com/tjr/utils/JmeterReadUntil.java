@@ -145,6 +145,9 @@ public class JmeterReadUntil {
 
         jsonObject.put("name",counterConfig.getName());
         jsonObject.put("enabled", counterConfig.isEnabled());
+        jsonObject.put("comments",counterConfig.getPropertyAsString("TestPlan.comments"));
+
+
         jsonObject.put("start", counterConfig.getPropertyAsString("CounterConfig.start"));
         jsonObject.put("end", counterConfig.getPropertyAsString("CounterConfig.end"));
         jsonObject.put("incr", counterConfig.getPropertyAsString("CounterConfig.incr"));
@@ -158,6 +161,9 @@ public class JmeterReadUntil {
     private static void getConfigTestElement(JSONObject jsonObject, ConfigTestElement configTestElement) {
         jsonObject.put("name", configTestElement.getName());
         jsonObject.put("enabled", configTestElement.isEnabled());
+        jsonObject.put("comments",configTestElement.getPropertyAsString("TestPlan.comments"));
+
+
         jsonObject.put("server", configTestElement.getPropertyAsString("FTPSampler.server"));
         jsonObject.put("port", configTestElement.getPropertyAsString("FTPSampler.port"));
         jsonObject.put("filename", configTestElement.getPropertyAsString("FTPSampler.filename"));
@@ -173,6 +179,9 @@ public class JmeterReadUntil {
     private static void getCSVDataSet(JSONObject jsonObject, CSVDataSet csvDataSet) {
         jsonObject.put("name", csvDataSet.getName());
         jsonObject.put("enabled", csvDataSet.isEnabled());
+        jsonObject.put("comments",csvDataSet.getPropertyAsString("TestPlan.comments"));
+
+
         jsonObject.put("delimiter", csvDataSet.getPropertyAsString("csvDataSet"));
         jsonObject.put("fileEncoding", csvDataSet.getPropertyAsString("fileEncoding"));
         jsonObject.put("filename", csvDataSet.getPropertyAsString("filename"));
@@ -190,12 +199,14 @@ public class JmeterReadUntil {
         jsonObject.put("name", constantTimer.getName());
         jsonObject.put("enabled", constantTimer.isEnabled());
         jsonObject.put("delay", constantTimer.getPropertyAsBoolean("ConstantTimer.delay"));
+        jsonObject.put("comments",constantTimer.getPropertyAsString("TestPlan.comments"));
 
     }
 
     private static void getXPathAssertion(JSONObject jsonObject, XPathAssertion xPathAssertion) {
         jsonObject.put("name", xPathAssertion.getName());
         jsonObject.put("enabled", xPathAssertion.isEnabled());
+        jsonObject.put("comments",xPathAssertion.getPropertyAsString("TestPlan.comments"));
 
         jsonObject.put("negate", xPathAssertion.getPropertyAsBoolean("XPath.negate"));
         jsonObject.put("xpath", xPathAssertion.getPropertyAsString("XPath.xpath"));
@@ -209,6 +220,7 @@ public class JmeterReadUntil {
     private static void getJSONPathAssertion(JSONObject jsonObject, JSONPathAssertion jsonPathAssertion) {
         jsonObject.put("name", jsonPathAssertion.getName());
         jsonObject.put("enabled", jsonPathAssertion.isEnabled());
+        jsonObject.put("comments",jsonPathAssertion.getPropertyAsString("TestPlan.comments"));
 
         jsonObject.put("JSON_PATH", jsonPathAssertion.getPropertyAsString("JSON_PATH"));
         jsonObject.put("EXPECTED_VALUE", jsonPathAssertion.getPropertyAsString("EXPECTED_VALUE"));
@@ -223,12 +235,14 @@ public class JmeterReadUntil {
         jsonObject.put("name", switchController.getName());
         jsonObject.put("enabled", switchController.isEnabled());
         jsonObject.put("style", switchController.getPropertyAsString("SwitchController.value"));
+        jsonObject.put("comments",switchController.getPropertyAsString("TestPlan.comments"));
 
     }
 
     private static void getThroughputController(JSONObject jsonObject, ThroughputController throughputController) {
         jsonObject.put("name", throughputController.getName());
         jsonObject.put("enabled", throughputController.isEnabled());
+        jsonObject.put("comments",throughputController.getPropertyAsString("TestPlan.comments"));
 
         jsonObject.put("style", throughputController.getPropertyAsBoolean("ThroughputController.style"));
 
@@ -241,11 +255,16 @@ public class JmeterReadUntil {
     private static void getOnceOnlyController(JSONObject jsonObject, OnceOnlyController onceOnlyController) {
         jsonObject.put("name", onceOnlyController.getName());
         jsonObject.put("enabled", onceOnlyController.isEnabled());
+        jsonObject.put("comments",onceOnlyController.getPropertyAsString("TestPlan.comments"));
+
     }
 
     private static void getWhileController(JSONObject jsonObject, WhileController whileController) {
         jsonObject.put("name", whileController.getName());
         jsonObject.put("enabled", whileController.isEnabled());
+        jsonObject.put("comments",whileController.getPropertyAsString("TestPlan.comments"));
+
+
         jsonObject.put("condition", whileController.getPropertyAsString("WhileController.condition"));
     }
 
@@ -254,23 +273,29 @@ public class JmeterReadUntil {
         jsonObject.put("enabled", loopController.isEnabled());
         jsonObject.put("continue_forever", loopController.getPropertyAsBoolean("LoopController.continue_forever"));
         jsonObject.put("loops", loopController.getPropertyAsString("LoopController.loops"));
+        jsonObject.put("comments",loopController.getPropertyAsString("TestPlan.comments"));
 
     }
 
     private static void getIfController(JSONObject jsonObject, IfController ifController) {
         jsonObject.put("name", ifController.getName());
         jsonObject.put("enabled", ifController.isEnabled());
+        jsonObject.put("comments",ifController.getPropertyAsString("TestPlan.comments"));
 
     }
 
     private static void getTransactionController(JSONObject jsonObject, TransactionController transactionController) {
         jsonObject.put("name", transactionController.getName());
         jsonObject.put("enabled", transactionController.isEnabled());
+        jsonObject.put("comments",transactionController.getPropertyAsString("TestPlan.comments"));
+
+
     }
 
     private static void getHTTPSamplerProxy(JSONObject jsonObject, HTTPSamplerProxy httpSamplerProxy) {
         jsonObject.put("name", httpSamplerProxy.getName());
         jsonObject.put("enabled", httpSamplerProxy.isEnabled());
+        jsonObject.put("comments",httpSamplerProxy.getPropertyAsString("TestPlan.comments"));
 
         HTTPFileArg[] httpFileArgs = httpSamplerProxy.getHTTPFiles();
 
@@ -311,6 +336,7 @@ public class JmeterReadUntil {
         jsonObject.put("name", javaConfig.getName());
         jsonObject.put("enabled", javaConfig.isEnabled());
         jsonObject.put("classname", javaConfig.getPropertyAsString("classname"));
+        jsonObject.put("comments",javaConfig.getPropertyAsString("TestPlan.comments"));
 
         Arguments arguments = javaConfig.getArguments();
         JSONArray argumentsArray = getArguments(arguments, Arrays.asList("name", "value", "metadata"));
@@ -320,6 +346,8 @@ public class JmeterReadUntil {
     private static void getCookieManager(JSONObject jsonObject, CookieManager cookieManager) {
         jsonObject.put("name", cookieManager.getName());
         jsonObject.put("enabled", cookieManager.isEnabled());
+        jsonObject.put("comments",cookieManager.getPropertyAsString("TestPlan.comments"));
+
         jsonObject.put("clearEachIteration", cookieManager.getPropertyAsBoolean("CookieManager.clearEachIteration"));
         List<JSONObject> cookies = new ArrayList<>();
 
@@ -350,6 +378,7 @@ public class JmeterReadUntil {
     private static  void getHeaderManager(JSONObject jsonObject, HeaderManager headerManager) {
         jsonObject.put("name", headerManager.getName());
         jsonObject.put("enabled", headerManager.isEnabled());
+        jsonObject.put("comments",headerManager.getPropertyAsString("TestPlan.comments"));
 
         List<JSONObject> headers = new ArrayList<>();
 
@@ -374,6 +403,7 @@ public class JmeterReadUntil {
         jsonObject.put("enabled", steppingThreadGroup.isEnabled());
         jsonObject.put("on_sample_error", steppingThreadGroup.getPropertyAsString("ThreadGroup.on_sample_error"));
         jsonObject.put("num_threads", steppingThreadGroup.getPropertyAsInt("ThreadGroup.num_threads"));
+        jsonObject.put("comments",steppingThreadGroup.getPropertyAsString("TestPlan.comments"));
 
         jsonObject.put("threads_initial_delay", steppingThreadGroup.getPropertyAsString("Threads initial delay"));
         jsonObject.put("start_users_count", steppingThreadGroup.getPropertyAsString("Start users count"));
@@ -402,6 +432,8 @@ public class JmeterReadUntil {
     private static void getSetupThreadGroup(JSONObject jsonObject, SetupThreadGroup setupThreadGroup) {
         jsonObject.put("name", setupThreadGroup.getName());
         jsonObject.put("enabled", setupThreadGroup.isEnabled());
+        jsonObject.put("comments",setupThreadGroup.getPropertyAsString("TestPlan.comments"));
+
         jsonObject.put("on_sample_error", setupThreadGroup.getPropertyAsString("ThreadGroup.on_sample_error"));
         jsonObject.put("num_threads", setupThreadGroup.getPropertyAsInt("ThreadGroup.num_threads"));
         jsonObject.put("ramp_time", setupThreadGroup.getPropertyAsInt("ThreadGroup.ramp_time"));
@@ -426,6 +458,8 @@ public class JmeterReadUntil {
     private static void getPostThreadGroup(JSONObject jsonObject, PostThreadGroup postThreadGroup) {
         jsonObject.put("name", postThreadGroup.getName());
         jsonObject.put("enabled", postThreadGroup.isEnabled());
+        jsonObject.put("comments",postThreadGroup.getPropertyAsString("TestPlan.comments"));
+
         jsonObject.put("on_sample_error", postThreadGroup.getPropertyAsString("ThreadGroup.on_sample_error"));
         jsonObject.put("num_threads", postThreadGroup.getPropertyAsInt("ThreadGroup.num_threads"));
         jsonObject.put("ramp_time", postThreadGroup.getPropertyAsInt("ThreadGroup.ramp_time"));
@@ -448,7 +482,7 @@ public class JmeterReadUntil {
 
     }
     private static void getThreadGroup(JSONObject jsonObject, ThreadGroup threadGroup) {
-
+        jsonObject.put("comments",threadGroup.getPropertyAsString("TestPlan.comments"));
         jsonObject.put("name", threadGroup.getName());
         jsonObject.put("enabled", threadGroup.isEnabled());
         jsonObject.put("on_sample_error", threadGroup.getPropertyAsString("ThreadGroup.on_sample_error"));
@@ -495,6 +529,7 @@ public class JmeterReadUntil {
         JSONArray argumentsArray = getArguments(arguments, argCols);
         jsonObject.put("name", arguments.getName());
         jsonObject.put("enabled", arguments.isEnabled());
+        jsonObject.put("comments",arguments.getPropertyAsString("TestPlan.comments"));
         jsonObject.put("arguments", argumentsArray);
     }
 
