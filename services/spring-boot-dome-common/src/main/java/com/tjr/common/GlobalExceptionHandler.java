@@ -1,6 +1,5 @@
 package com.tjr.common;
 
-import com.tjr.base.controller.BaseController;
 import com.tjr.utils.ResponseUtils;
 import org.apache.shiro.authz.UnauthenticatedException;
 import org.apache.shiro.authz.UnauthorizedException;
@@ -19,22 +18,22 @@ import javax.servlet.http.HttpServletRequest;
  */
 @ControllerAdvice
 @ResponseBody
-public class GlobalExceptionHandler extends BaseController {
+public class GlobalExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	public ResponseUtils exceptionHandler(HttpServletRequest request, Exception ex) {
 		if (ex instanceof UnauthenticatedException) {
-			return ResponseUtils.errorException(this.getMessage("shiro.error", request));
+			return ResponseUtils.errorException(ex.getMessage());
 		} else if (ex instanceof UnauthorizedException) {
-			return ResponseUtils.errorException(this.getMessage("shiro.error", request));
+			return ResponseUtils.errorException(ex.getMessage());
 		}
 		ex.printStackTrace();
-		return ResponseUtils.errorException(this.getMessage("execption.error", request));
+		return ResponseUtils.errorException(ex.getMessage());
 	}
 
 	@ExceptionHandler(value = MultipartException.class)
 	public ResponseUtils multipartExceptionHandler(HttpServletRequest request, MultipartException e) {
 		e.printStackTrace();
-		return ResponseUtils.errorException(this.getMessage("file.upload.error", request));
+		return ResponseUtils.errorException(e.getMessage());
 	}
 
 }

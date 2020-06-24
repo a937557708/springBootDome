@@ -1,14 +1,32 @@
 package com.tjr.utils;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSONException;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.XML;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * @ClassName: JsonUtils
@@ -163,5 +181,77 @@ public class JsonUtils {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public static void parserXml(String strXml) {
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document document = db.parse(new InputSource(new StringReader(strXml)));
+			NodeList sessions = document.getChildNodes();
+			/*HashMap<String,String> hash=new HashMap<String,String>();*/
+			String json="";
+			for (int i = 0; i < sessions.getLength(); i++) {
+				Node session = sessions.item(i);
+				NodeList sessionInfo = session.getChildNodes();
+				for (int j = 0; j < sessionInfo.getLength(); j++) {
+					Node node = sessionInfo.item(j);
+					NodeList sessionMeta = node.getChildNodes();
+					for (int k = 0; k < sessionMeta.getLength(); k++) {
+						System.out.println(sessionMeta.item(k).getTextContent());
+						json=sessionMeta.item(k).getTextContent();
+						// hash.put(sessionMeta.item(k).getNodeName(), sessionMeta.item(k).getTextContent());
+					}
+				}
+			}
+			System.out.println("获取json"+json);
+			try {
+				JSONObject result=JSONObject.parseObject(json);
+				//result.get("message");
+				//result.get("statusCode");
+				if(result.get("statusCode").equals("S")) {
+					System.out.println(result.get("message"));
+				}else {
+					System.out.println("失败");
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			System.out.println("解析完毕");
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (ParserConfigurationException e) {
+			System.out.println(e.getMessage());
+		} catch (SAXException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+
+	/**
+	 * xml转换json
+	 * @param xml
+	 * @return
+	 * @throws JSONException
+	 */
+	public static org.json.JSONObject XML2Json(String xml) throws JSONException{
+		org.json.JSONObject xmlJSONObj = null;
+		try {
+			xmlJSONObj = XML.toJSONObject(xml);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return xmlJSONObj;
+	}
+
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String strXml = "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><ns2:method xmlns:ns2=\"http://service.inquiry.els.com/\"><return>{\"message\":\"数据成功\",\"statusCode\":\"S\"}</return></ns2:method></soap:Body></soap:Envelope>";
+		XML2Json(strXml);
 	}
 }

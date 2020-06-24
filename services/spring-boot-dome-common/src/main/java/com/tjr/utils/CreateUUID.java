@@ -14,12 +14,12 @@ public class CreateUUID {
      * 百度uiid
      * @return
      */
-    public String getBaiDuUIID(){
+    public static String getBaiDuUIID(){
         UidGenerator uidGenerator=new CachedUidGenerator();
         long uid = uidGenerator.getUID();
         return String.valueOf(uid);
     }
-    public String getUIID(){
+    public static String getUIID(){
         String uuid = UUID.randomUUID().toString();
         System.out.println("uuid : " + uuid);
         uuid = UUID.randomUUID().toString().replaceAll("-","");
