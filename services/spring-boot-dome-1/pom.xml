@@ -32,7 +32,6 @@
         </dependency>
 
 
-
         <!-- querydsl -->
         <dependency>
             <groupId>com.querydsl</groupId>
@@ -101,28 +100,39 @@
             <version>1.5rc3</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>jalopy</groupId>-->
-<!--            <artifactId>com.tjr.jalopy</artifactId>-->
-<!--            <version>1.0</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/../../lib/jalopy.jar</systemPath>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>jalopy</groupId>-->
-<!--            <artifactId>com.tjr.jalopy-eclipse</artifactId>-->
-<!--            <version>1.0</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/../../lib/jalopy-eclipse.jar</systemPath>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>jalopy</groupId>-->
+        <!--            <artifactId>com.tjr.jalopy</artifactId>-->
+        <!--            <version>1.0</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${project.basedir}/../../lib/jalopy.jar</systemPath>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>jalopy</groupId>-->
+        <!--            <artifactId>com.tjr.jalopy-eclipse</artifactId>-->
+        <!--            <version>1.0</version>-->
+        <!--            <scope>system</scope>-->
+        <!--            <systemPath>${project.basedir}/../../lib/jalopy-eclipse.jar</systemPath>-->
+        <!--        </dependency>-->
 
-<!--        <dependency>-->
-<!--            <groupId>jalopy</groupId>-->
-<!--            <artifactId>com.tjr.log4j</artifactId>-->
-<!--            <version>1.0</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/../../lib/log4j.jar</systemPath>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>spire</groupId>
+            <artifactId>com.spire.doc</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../../lib/Spire.Doc.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>3.8</version>
+        </dependency>
     </dependencies>
 
     <build>

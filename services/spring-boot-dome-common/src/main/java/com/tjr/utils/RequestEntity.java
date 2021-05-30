@@ -2,12 +2,15 @@ package com.tjr.utils;
 
 
 
+import com.alibaba.fastjson.JSON;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Properties;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
@@ -36,5 +39,10 @@ public class RequestEntity {
     
     //get set方法省略
 
+    public static void main(String[] args) {
+        String testurl1 = System.getProperty("MY_VARIABLE");
+        Properties properties= System.getProperties();
+        System.out.println(JSON.toJSONString(properties));
+    }
     
 }

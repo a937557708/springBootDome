@@ -20,4 +20,9 @@ public class BaseController {
 
         return "1";
     }
+    @RequestMapping("/test1")
+    public String tt1(HttpServletRequest request) {
+
+        return "111";
+    }
 }
